@@ -2,6 +2,8 @@ const modals = () => {
 
 	const scroll				= window.innerWidth - document.body.clientWidth;
 	
+	let btnNotPressed				= true;
+	
 	function bindModal(triggerSelector, modalSelector, closeSelector, dataWindow = true) {
 		const trigger			= document.querySelectorAll(triggerSelector),
 				modals			= document.querySelector(modalSelector),
@@ -33,6 +35,7 @@ const modals = () => {
 			item.addEventListener('click', (e) => {
 					if (e.target) {
 					e.preventDefault();
+					btnNotPressed = false;
 					checkData(() => openModal(modals), 'none');
 				}
 			});
@@ -49,8 +52,10 @@ const modals = () => {
 		});
 
 		function modalOpenByScrollToBottom() {
-			if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+			if ((window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) &&
+			btnNotPressed) {
 				openModal(document.querySelector('.popup-gift'));
+				document.querySelector('.fixed-gift').remove();
 				window.removeEventListener('scroll', modalOpenByScrollToBottom);
 			}
 		}

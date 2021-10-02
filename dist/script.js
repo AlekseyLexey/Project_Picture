@@ -955,6 +955,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var modals = function modals() {
   var scroll = window.innerWidth - document.body.clientWidth;
+  var btnNotPressed = true;
 
   function bindModal(triggerSelector, modalSelector, closeSelector) {
     var dataWindow = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
@@ -989,6 +990,7 @@ var modals = function modals() {
       item.addEventListener('click', function (e) {
         if (e.target) {
           e.preventDefault();
+          btnNotPressed = false;
           checkData(function () {
             return openModal(modals);
           }, 'none');
@@ -1005,8 +1007,9 @@ var modals = function modals() {
     });
 
     function modalOpenByScrollToBottom() {
-      if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+      if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight && btnNotPressed) {
         openModal(document.querySelector('.popup-gift'));
+        document.querySelector('.fixed-gift').remove();
         window.removeEventListener('scroll', modalOpenByScrollToBottom);
       }
     }
