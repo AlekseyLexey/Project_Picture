@@ -8,8 +8,8 @@ const modals = () => {
 				close				= document.querySelector(closeSelector);
 				
 
-		function openModal() {
-			modals.style.display = 'block';
+		function openModal(modal) {
+			modal.style.display = 'block';
 			document.body.style.overflow = 'hidden';
 			document.body.style.marginRight = `${scroll}px`;
 		}
@@ -33,7 +33,7 @@ const modals = () => {
 			item.addEventListener('click', (e) => {
 					if (e.target) {
 					e.preventDefault();
-					checkData(openModal, 'none');
+					checkData(() => openModal(modals), 'none');
 				}
 			});
 		});
@@ -47,6 +47,15 @@ const modals = () => {
 				checkData(closeModal, '');
 			}
 		});
+
+		function modalOpenByScrollToBottom() {
+			if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+				openModal(document.querySelector('.popup-gift'));
+				window.removeEventListener('scroll', modalOpenByScrollToBottom);
+			}
+		}
+	
+		window.addEventListener('scroll', modalOpenByScrollToBottom);
 	}
 
 	function showModalByTime(selector, time) {
