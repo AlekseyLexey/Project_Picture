@@ -954,23 +954,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var modals = function modals() {
-  var scroll = window.innerWidth - document.body.clientWidth;
   var btnNotPressed = true;
+  var scroll = window.innerWidth - document.body.clientWidth;
 
   function bindModal(triggerSelector, modalSelector, closeSelector) {
     var dataWindow = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
     var trigger = document.querySelectorAll(triggerSelector),
-        modals = document.querySelector(modalSelector),
-        close = document.querySelector(closeSelector);
+        modal = document.querySelector(modalSelector),
+        close = document.querySelector(closeSelector),
+        windows = document.querySelectorAll('[data-modal]');
 
-    function openModal(modal) {
+    function openModal() {
       modal.style.display = 'block';
       document.body.style.overflow = 'hidden';
       document.body.style.marginRight = "".concat(scroll, "px");
     }
 
     function closeModal() {
-      modals.style.display = 'none';
+      modal.style.display = 'none';
       document.body.style.overflow = '';
       document.body.style.marginRight = "0px";
     }
@@ -990,31 +991,34 @@ var modals = function modals() {
       item.addEventListener('click', function (e) {
         if (e.target) {
           e.preventDefault();
+          windows.forEach(function (item) {
+            item.style.display = 'none';
+            item.classList.add('animated', 'fadeIn');
+          });
           btnNotPressed = false;
-          checkData(function () {
-            return openModal(modals);
-          }, 'none');
+          checkData(openModal, 'none');
         }
       });
     });
     close.addEventListener('click', function () {
       checkData(closeModal, '');
     });
-    modals.addEventListener('click', function (e) {
-      if (e.target === modals) {
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) {
         checkData(closeModal, '');
       }
     });
+  }
 
-    function modalOpenByScrollToBottom() {
-      if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight && btnNotPressed) {
-        openModal(document.querySelector('.popup-gift'));
-        document.querySelector('.fixed-gift').remove();
-        window.removeEventListener('scroll', modalOpenByScrollToBottom);
+  function modalOpenByScrollToBottom(selector) {
+    window.addEventListener('scroll', function () {
+      var scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+
+      if (window.pageYOffset + document.documentElement.clientHeight >= scrollHeight && btnNotPressed) {
+        document.querySelector(selector).click();
+        document.querySelector(selector).remove();
       }
-    }
-
-    window.addEventListener('scroll', modalOpenByScrollToBottom);
+    });
   }
 
   function showModalByTime(selector, time) {
@@ -1036,7 +1040,8 @@ var modals = function modals() {
 
   bindModal('.button-design', '.popup-design', '.popup-design .popup-close');
   bindModal('.button-consultation', '.popup-consultation', '.popup-consultation .popup-close');
-  bindModal('.fixed-gift', '.popup-gift', '.popup-gift .popup-close', false); // showModalByTime('.popup-consultation', 60000);
+  bindModal('.fixed-gift', '.popup-gift', '.popup-gift .popup-close', false);
+  modalOpenByScrollToBottom('.fixed-gift'); // showModalByTime('.popup-consultation', 60000);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);
