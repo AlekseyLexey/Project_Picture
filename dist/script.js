@@ -931,11 +931,14 @@ module.exports = g;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+
 
 document.addEventListener('DOMContentLoaded', function () {
   "use strict";
 
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_0__["default"])();
+  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_1__["default"])('.feedback-slider-item', ' ', '.main-prev-btn', '.main-next-btn');
 });
 
 /***/ }),
@@ -1045,6 +1048,66 @@ var modals = function modals() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);
+
+/***/ }),
+
+/***/ "./src/js/modules/slider.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/slider.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var slider = function slider(sliderWrapper, dir, prevBtn, nextBtn) {
+  var allSlides = document.querySelectorAll(sliderWrapper);
+  var slideIndex = 1;
+  showSliders(slideIndex);
+
+  function showSliders(n) {
+    if (n > allSlides.length) {
+      slideIndex = 1;
+    }
+
+    if (n < 1) {
+      slideIndex = allSlides.length;
+    }
+
+    allSlides.forEach(function (item) {
+      item.classList.add('animated');
+      item.style.display = 'none';
+    });
+    allSlides[slideIndex - 1].style.display = 'block';
+  }
+
+  function plusSlide(n) {
+    showSliders(slideIndex += n);
+  }
+
+  try {
+    var prevArrow = document.querySelector(prevBtn),
+        nextArrow = document.querySelector(nextBtn);
+    prevArrow.addEventListener('click', function () {
+      plusSlide(-1);
+      allSlides[slideIndex - 1].classList.remove('slideInLeft');
+      allSlides[slideIndex - 1].classList.add('slideInRight');
+    });
+    nextArrow.addEventListener('click', function () {
+      plusSlide(1);
+      allSlides[slideIndex - 1].classList.remove('slideInRight');
+      allSlides[slideIndex - 1].classList.add('slideInLeft');
+    });
+  } catch (error) {
+    console.log('ERROR');
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (slider);
 
 /***/ })
 
