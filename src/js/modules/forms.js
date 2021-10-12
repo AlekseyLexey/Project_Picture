@@ -1,3 +1,5 @@
+import { processingPostData } from "../services/requests";
+
 const forms = () => {
 	const forms									= document.querySelectorAll('form'),
 			upload								= document.querySelectorAll('[name="upload"]');
@@ -29,15 +31,6 @@ const forms = () => {
 			item.previousElementSibling.textContent = name;
 		});
 	});
-
-	const processingPostData = async (url, data) => {
-		let res = await fetch(url, {
-			method: "POST",
-			body: data
-		});
-
-		return await res.text();
-	};
 
 	function postData(form) {
 		form.addEventListener('submit', (e) => {
