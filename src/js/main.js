@@ -2,6 +2,7 @@ import checkInputsText from "./modules/checkInputsText";
 import forms from "./modules/forms";
 import mask from "./modules/mask";
 import modals from "./modules/modals";
+import showMoreStyles from "./modules/showMoreStyles";
 import slider from "./modules/slider";
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,4 +15,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	mask('[name="phone"]');
 	checkInputsText('[name="name"]');
 	checkInputsText('[name="message"]');
+	showMoreStyles('.styles-2', '.button-transparent');
 });
