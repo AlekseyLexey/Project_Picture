@@ -1,3 +1,4 @@
+import checkInputsText from "./modules/checkInputsText";
 import forms from "./modules/forms";
 import mask from "./modules/mask";
 import modals from "./modules/modals";
@@ -11,4 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	slider('.feedback-slider-item', ' ', '.main-prev-btn', '.main-next-btn');
 	forms();
 	mask('[name="phone"]');
+	checkInputsText('[name="name"]');
+	checkInputsText('[name="message"]');
 });

@@ -3,8 +3,8 @@ const checkInputsText = (selector) => {
 
 	inputs.forEach(input => {
 		input.addEventListener('input', () => {
-			
-		})
+			input.value = input.value.replace(/[^а-яё 0-9]/ig, '');
+		});
 	});
 };
 
