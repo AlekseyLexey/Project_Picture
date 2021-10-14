@@ -1,6 +1,6 @@
 import { processingPostData } from "../services/requests";
 
-const forms = () => {
+const forms = (allPrice) => {
 	const forms									= document.querySelectorAll('form'),
 			upload								= document.querySelectorAll('[name="upload"]');
 
@@ -58,6 +58,11 @@ const forms = () => {
 			console.log(api);
 
 			const formData						= new FormData(form);
+			if (form.getAttribute('data-calc') === "end") {
+				for (let key in allPrice) {
+					formData.append(key, allPrice[key]);
+				}
+			}
 
 			processingPostData(api, formData)
 				.then(data => {
