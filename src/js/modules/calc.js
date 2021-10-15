@@ -1,4 +1,8 @@
+import {getResourseData} from '../services/requests';
+
 const calc = (sizeId, materialId, optionsId, selectorPromocode, selectorPrice, allPrice) => {
+
+	// ? CALC Version 1.0 (value)
 
 	const sizeBlock						= document.querySelector(sizeId),
 			materialBlock					= document.querySelector(materialId),
@@ -25,6 +29,13 @@ const calc = (sizeId, materialId, optionsId, selectorPromocode, selectorPrice, a
 	materialBlock.addEventListener('change', endAmount);
 	optionsBlock.addEventListener('change', endAmount);
 	promocodeBlock.addEventListener('input', endAmount);
+
+	// ? CALC Version 2.0 (db.json)
+
+	getResourseData('http://localhost:3000/calc')
+		.then(res => console.log(res));
+
+	console.log(sizeBlock);
 };
 
 export default calc;
