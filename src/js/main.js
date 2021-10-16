@@ -19,5 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	checkInputsText('[name="name"]');
 	checkInputsText('[name="message"]');
 	showMoreStyles('#styles .row', '.button-transparent');
-	calc('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow);
+	// calc('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow); For calc version 1.0!
+	calc('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow, '[data-size]', '[data-material]', '[data-options]');
 });

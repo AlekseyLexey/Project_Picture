@@ -4309,12 +4309,13 @@ document.addEventListener('DOMContentLoaded', function () {
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_4__["default"])();
   Object(_modules_slider__WEBPACK_IMPORTED_MODULE_6__["default"])('.main-slider-item', 'vertical');
   Object(_modules_slider__WEBPACK_IMPORTED_MODULE_6__["default"])('.feedback-slider-item', ' ', '.main-prev-btn', '.main-next-btn');
-  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])(priceWindow);
   Object(_modules_mask__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="phone"]');
   Object(_modules_checkInputsText__WEBPACK_IMPORTED_MODULE_1__["default"])('[name="name"]');
   Object(_modules_checkInputsText__WEBPACK_IMPORTED_MODULE_1__["default"])('[name="message"]');
-  Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__["default"])('#styles .row', '.button-transparent');
-  Object(_modules_calc__WEBPACK_IMPORTED_MODULE_0__["default"])('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow);
+  Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__["default"])('#styles .row', '.button-transparent'); // calc('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow); For calc version 1.0!
+
+  Object(_modules_calc__WEBPACK_IMPORTED_MODULE_0__["default"])('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow, '[data-size]', '[data-material]', '[data-options]');
 });
 
 /***/ }),
@@ -4328,12 +4329,54 @@ document.addEventListener('DOMContentLoaded', function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var calc = function calc(sizeId, materialId, optionsId, selectorPromocode, selectorPrice, allPrice) {
+/* harmony import */ var _services_requests__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/requests */ "./src/js/services/requests.js");
+
+
+var calc = function calc(sizeId, materialId, optionsId, selectorPromocode, selectorPrice, allPrice, sizeData, materialData, optionsData) {
+  // ? CALC Version 1.0 (value)
+  // const sizeBlock						= document.querySelector(sizeId),
+  // 		materialBlock					= document.querySelector(materialId),
+  // 		optionsBlock					= document.querySelector(optionsId),
+  // 		promocodeBlock					= document.querySelector(selectorPromocode),
+  // 		priceBlock						= document.querySelector(selectorPrice);
+  // let sum = 0;
+  // const endAmount = () => {
+  // 	allPrice.sum = sum = Math.round((+sizeBlock.value) * (+materialBlock.value) + (+optionsBlock.value));
+  // 	if (sizeBlock.value == '' || materialBlock.value == '') {
+  // 		priceBlock.textContent = 'Пожалуйста выберите размер и материал картины';
+  // 	} else if (promocodeBlock.value === 'IWANTPOPART'){
+  // 		priceBlock.textContent = Math.round(sum * 0.7);
+  // 	} else {
+  // 		priceBlock.textContent = sum;
+  // 	}
+  // 	console.log(allPrice);
+  // };
+  // sizeBlock.addEventListener('change', endAmount);
+  // materialBlock.addEventListener('change', endAmount);
+  // optionsBlock.addEventListener('change', endAmount);
+  // promocodeBlock.addEventListener('input', endAmount);
+  // ? CALC Version 2.0 (db.json)
   var sizeBlock = document.querySelector(sizeId),
       materialBlock = document.querySelector(materialId),
       optionsBlock = document.querySelector(optionsId),
       promocodeBlock = document.querySelector(selectorPromocode),
-      priceBlock = document.querySelector(selectorPrice);
+      priceBlock = document.querySelector(selectorPrice),
+      sizeAll = document.querySelectorAll(sizeData),
+      materialAll = document.querySelectorAll(materialData),
+      optionsAll = document.querySelectorAll(optionsData);
+  Object(_services_requests__WEBPACK_IMPORTED_MODULE_0__["getResourseData"])('http://localhost:3000/calc').then(function (res) {
+    for (var i = 0; i < sizeAll.length; i++) {
+      sizeAll[i].value = res[0].size[i];
+    }
+
+    for (var _i = 0; _i < materialAll.length; _i++) {
+      materialAll[_i].value = res[0].material[_i];
+    }
+
+    for (var _i2 = 0; _i2 < optionsAll.length; _i2++) {
+      optionsAll[_i2].value = res[0].options[_i2];
+    }
+  });
   var sum = 0;
 
   var endAmount = function endAmount() {
@@ -4346,8 +4389,6 @@ var calc = function calc(sizeId, materialId, optionsId, selectorPromocode, selec
     } else {
       priceBlock.textContent = sum;
     }
-
-    console.log(allPrice);
   };
 
   sizeBlock.addEventListener('change', endAmount);
