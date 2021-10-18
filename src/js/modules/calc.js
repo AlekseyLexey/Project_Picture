@@ -67,10 +67,9 @@ const calc = (sizeId, materialId, optionsId, selectorPromocode, selectorPrice, a
 		if (sizeBlock.value == '' || materialBlock.value == '') {
 			priceBlock.textContent = 'Пожалуйста выберите размер и материал картины';
 		} else if (promocodeBlock.value === 'IWANTPOPART'){
-			priceBlock.textContent = Math.round(sum * 0.7);
+			allPrice.sum = priceBlock.textContent = Math.round(sum * 0.7);
 		} else {
 			priceBlock.textContent = sum;
-			allPrice.sum = sum;
 		}
 
 	};
