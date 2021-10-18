@@ -5,6 +5,7 @@ import mask from "./modules/mask";
 import modals from "./modules/modals";
 import showMoreStyles from "./modules/showMoreStyles";
 import slider from "./modules/slider";
+import tabs from "./modules/tabs";
 
 document.addEventListener('DOMContentLoaded', () => {
 	"use strict";
@@ -21,4 +22,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	showMoreStyles('#styles .row', '.button-transparent');
 	// calc('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow); For calc version 1.0!
 	calc('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow, '[data-size]', '[data-material]', '[data-options]');
+	tabs();
 });

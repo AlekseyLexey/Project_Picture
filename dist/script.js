@@ -4295,6 +4295,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
 /* harmony import */ var _modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/showMoreStyles */ "./src/js/modules/showMoreStyles.js");
 /* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
+
 
 
 
@@ -4316,6 +4318,7 @@ document.addEventListener('DOMContentLoaded', function () {
   Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__["default"])('#styles .row', '.button-transparent'); // calc('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow); For calc version 1.0!
 
   Object(_modules_calc__WEBPACK_IMPORTED_MODULE_0__["default"])('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow, '[data-size]', '[data-material]', '[data-options]');
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_7__["default"])();
 });
 
 /***/ }),
@@ -4385,7 +4388,7 @@ var calc = function calc(sizeId, materialId, optionsId, selectorPromocode, selec
     if (sizeBlock.value == '' || materialBlock.value == '') {
       priceBlock.textContent = 'Пожалуйста выберите размер и материал картины';
     } else if (promocodeBlock.value === 'IWANTPOPART') {
-      priceBlock.textContent = Math.round(sum * 0.7);
+      allPrice.sum = priceBlock.textContent = Math.round(sum * 0.7);
     } else {
       priceBlock.textContent = sum;
     }
@@ -4859,6 +4862,93 @@ var slider = function slider(sliderWrapper, dir, prevBtn, nextBtn) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (slider);
+
+/***/ }),
+
+/***/ "./src/js/modules/tabs.js":
+/*!********************************!*\
+  !*** ./src/js/modules/tabs.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var tabs = function tabs() {
+  var menu = document.querySelector('.portfolio-menu'),
+      items = menu.querySelectorAll('li'),
+      btnAll = menu.querySelector('.all'),
+      btnLovers = menu.querySelector('.lovers'),
+      btnChef = menu.querySelector('.chef'),
+      btnGirl = menu.querySelector('.girl'),
+      btnGuy = menu.querySelector('.guy'),
+      btnGrandmother = menu.querySelector('.grandmother'),
+      btnGranddad = menu.querySelector('.granddad'),
+      wrapper = document.querySelector('.portfolio-wrapper'),
+      markAll = wrapper.querySelectorAll('.all'),
+      markLovers = wrapper.querySelectorAll('.lovers'),
+      markChefs = wrapper.querySelectorAll('.chef'),
+      markGirls = wrapper.querySelectorAll('.girl'),
+      markGuys = wrapper.querySelectorAll('.guy'),
+      no = document.querySelector('.portfolio-no');
+
+  function filterMark(markType) {
+    markAll.forEach(function (item) {
+      item.style.display = 'none';
+      item.classList.remove('animated', 'fadeIn');
+    });
+    no.style.display = 'none';
+    no.classList.remove('animated', 'fadeIn');
+
+    if (markType) {
+      markType.forEach(function (element) {
+        element.style.display = 'block';
+        element.classList.add('animated', 'fadeIn');
+      });
+    } else {
+      no.style.display = 'block';
+      no.classList.add('animated', 'fadeIn');
+    }
+  }
+
+  btnAll.addEventListener('click', function () {
+    filterMark(markAll);
+  });
+  btnLovers.addEventListener('click', function () {
+    filterMark(markLovers);
+  });
+  btnChef.addEventListener('click', function () {
+    filterMark(markChefs);
+  });
+  btnGirl.addEventListener('click', function () {
+    filterMark(markGirls);
+  });
+  btnGuy.addEventListener('click', function () {
+    filterMark(markGuys);
+  });
+  btnGrandmother.addEventListener('click', function () {
+    filterMark();
+  });
+  btnGranddad.addEventListener('click', function () {
+    filterMark();
+  });
+  menu.addEventListener('click', function (e) {
+    var target = e.target;
+
+    if (target && target.tagName == "LI") {
+      items.forEach(function (item) {
+        return item.classList.remove('active');
+      });
+      target.classList.add('active');
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (tabs);
 
 /***/ }),
 
