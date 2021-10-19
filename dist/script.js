@@ -4289,13 +4289,15 @@ module.exports = g;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
-/* harmony import */ var _modules_checkInputsText__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/checkInputsText */ "./src/js/modules/checkInputsText.js");
-/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
-/* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
-/* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
-/* harmony import */ var _modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/showMoreStyles */ "./src/js/modules/showMoreStyles.js");
-/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
-/* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
+/* harmony import */ var _modules_changeImg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/changeImg */ "./src/js/modules/changeImg.js");
+/* harmony import */ var _modules_checkInputsText__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/checkInputsText */ "./src/js/modules/checkInputsText.js");
+/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+/* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
+/* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
+/* harmony import */ var _modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/showMoreStyles */ "./src/js/modules/showMoreStyles.js");
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
+
 
 
 
@@ -4308,17 +4310,18 @@ document.addEventListener('DOMContentLoaded', function () {
   "use strict";
 
   var priceWindow = {};
-  Object(_modules_modals__WEBPACK_IMPORTED_MODULE_4__["default"])();
-  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_6__["default"])('.main-slider-item', 'vertical');
-  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_6__["default"])('.feedback-slider-item', ' ', '.main-prev-btn', '.main-next-btn');
-  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])(priceWindow);
-  Object(_modules_mask__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="phone"]');
-  Object(_modules_checkInputsText__WEBPACK_IMPORTED_MODULE_1__["default"])('[name="name"]');
-  Object(_modules_checkInputsText__WEBPACK_IMPORTED_MODULE_1__["default"])('[name="message"]');
-  Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__["default"])('#styles .row', '.button-transparent'); // calc('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow); For calc version 1.0!
+  Object(_modules_modals__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_7__["default"])('.main-slider-item', 'vertical');
+  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_7__["default"])('.feedback-slider-item', ' ', '.main-prev-btn', '.main-next-btn');
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])(priceWindow);
+  Object(_modules_mask__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="phone"]');
+  Object(_modules_checkInputsText__WEBPACK_IMPORTED_MODULE_2__["default"])('[name="name"]');
+  Object(_modules_checkInputsText__WEBPACK_IMPORTED_MODULE_2__["default"])('[name="message"]');
+  Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_6__["default"])('#styles .row', '.button-transparent'); // calc('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow); For calc version 1.0!
 
   Object(_modules_calc__WEBPACK_IMPORTED_MODULE_0__["default"])('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow, '[data-size]', '[data-material]', '[data-options]');
-  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_7__["default"])();
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_8__["default"])();
+  Object(_modules_changeImg__WEBPACK_IMPORTED_MODULE_1__["default"])();
 });
 
 /***/ }),
@@ -4401,6 +4404,49 @@ var calc = function calc(sizeId, materialId, optionsId, selectorPromocode, selec
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (calc);
+
+/***/ }),
+
+/***/ "./src/js/modules/changeImg.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/changeImg.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var changeImg = function changeImg() {
+  var blocks = document.querySelectorAll('.sizes-block'),
+      imgs = document.querySelectorAll('.sizes-block img');
+  blocks.forEach(function (item) {
+    item.addEventListener('mouseenter', function (e) {
+      var target = e.target;
+      console.log(target);
+
+      if (target && target.classList.contains('sizes-block')) {
+        blocks.forEach(function (item, i) {
+          if (target === item) {
+            imgs[i].setAttribute('src', "assets/img/sizes-".concat(i + 1, "-1.png"));
+          }
+        });
+      }
+    });
+  });
+  blocks.forEach(function (item) {
+    item.addEventListener('mouseleave', function () {
+      imgs.forEach(function (item, i) {
+        item.setAttribute('src', "assets/img/sizes-".concat(i + 1, ".png"));
+      });
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (changeImg);
 
 /***/ }),
 
