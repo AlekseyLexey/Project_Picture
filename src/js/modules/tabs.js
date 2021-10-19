@@ -17,6 +17,13 @@ const tabs = () => {
 			markGuys					= wrapper.querySelectorAll('.guy'),
 			no							= document.querySelector('.portfolio-no');
 
+	function btnLisener(btn, mark = '') {
+
+		btn.addEventListener('click', () => {
+			filterMark(mark);
+		});
+	}
+
 	function filterMark(markType) {
 
 		markAll.forEach(item => {
@@ -28,8 +35,13 @@ const tabs = () => {
 		no.classList.remove('animated', 'fadeIn');
 
 		if (markType) {
-
+			
 			markType.forEach(element => {
+				wrapper.style.cssText = `
+					display: flex;
+					justify-content:center;
+					align-items: center;
+				`;
 				element.style.display = 'block';
 				element.classList.add('animated', 'fadeIn');
 			});
@@ -42,33 +54,19 @@ const tabs = () => {
 		}
 	}
 
-	btnAll.addEventListener('click', () => {
-		filterMark(markAll);
-	});
+	btnLisener(btnAll, markAll);
 
-	btnLovers.addEventListener('click', () => {
-		filterMark(markLovers);
-	});
+	btnLisener(btnLovers, markLovers);
 
-	btnChef.addEventListener('click', () => {
-		filterMark(markChefs);
-	});
+	btnLisener(btnChef, markChefs);
 
-	btnGirl.addEventListener('click', () => {
-		filterMark(markGirls);
-	});
+	btnLisener(btnGirl, markGirls);
 
-	btnGuy.addEventListener('click', () => {
-		filterMark(markGuys);
-	});
+	btnLisener(btnGuy, markGuys);
 
-	btnGrandmother.addEventListener('click', () => {
-		filterMark();
-	});
+	btnLisener(btnGrandmother);
 
-	btnGranddad.addEventListener('click', () => {
-		filterMark();
-	});
+	btnLisener(btnGranddad);
 
 	menu.addEventListener('click', (e) => {
 
