@@ -24,5 +24,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	// calc('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow); For calc version 1.0!
 	calc('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow, '[data-size]', '[data-material]', '[data-options]');
 	tabs();
-	changeImg();
+	changeImg('.sizes-block');
 });
