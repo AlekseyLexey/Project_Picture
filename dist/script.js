@@ -4420,10 +4420,25 @@ var accordion = function accordion(triggersSelector) {
   // 		}
   // 	});
   // });
-  // ? Version 2.0 pure JS + CSS:
+
+  /*
+  ? Version 2.0 JS + CSS:
+  ? (.often-questions .accordion-block)
+  ? (.often-questions .accordion-block.active-content)
+  */
   var triggers = document.querySelectorAll(triggersSelector);
   triggers.forEach(function (item) {
-    item.addEventListener('click');
+    item.addEventListener('click', function () {
+      this.classList.toggle('active-style');
+      this.nextElementSibling.classList.toggle('active-content');
+
+      if (this.classList.contains('active-style')) {
+        //?																										80 - padding
+        this.nextElementSibling.style.maxHeight = this.nextElementSibling.scrollHeight + 80 + 'px';
+      } else {
+        this.nextElementSibling.style.maxHeight = '0px';
+      }
+    });
   });
 };
 
