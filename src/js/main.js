@@ -6,6 +6,7 @@ import checkInputsText from "./modules/checkInputsText";
 import forms from "./modules/forms";
 import mask from "./modules/mask";
 import modals from "./modules/modals";
+import scrolling from "./modules/scrolling";
 import showMoreStyles from "./modules/showMoreStyles";
 import slider from "./modules/slider";
 import tabs from "./modules/tabs";
@@ -29,4 +30,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	changeImg('.sizes-block');
 	accordion('.accordion-heading');
 	burger('.burger-menu', '.burger');
+	scrolling('.pageup');
 });

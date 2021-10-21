@@ -4353,9 +4353,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
-/* harmony import */ var _modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/showMoreStyles */ "./src/js/modules/showMoreStyles.js");
-/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
-/* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
+/* harmony import */ var _modules_scrolling__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/scrolling */ "./src/js/modules/scrolling.js");
+/* harmony import */ var _modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/showMoreStyles */ "./src/js/modules/showMoreStyles.js");
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
+
 
 
 
@@ -4372,19 +4374,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var priceWindow = {};
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_7__["default"])();
-  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_9__["default"])('.main-slider-item', 'vertical');
-  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_9__["default"])('.feedback-slider-item', ' ', '.main-prev-btn', '.main-next-btn');
+  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_10__["default"])('.main-slider-item', 'vertical');
+  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_10__["default"])('.feedback-slider-item', ' ', '.main-prev-btn', '.main-next-btn');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_5__["default"])(priceWindow);
   Object(_modules_mask__WEBPACK_IMPORTED_MODULE_6__["default"])('[name="phone"]');
   Object(_modules_checkInputsText__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="name"]');
   Object(_modules_checkInputsText__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="message"]');
-  Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_8__["default"])('#styles .row', '.button-transparent'); // calc('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow); For calc version 1.0!
+  Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_9__["default"])('#styles .row', '.button-transparent'); // calc('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow); For calc version 1.0!
 
   Object(_modules_calc__WEBPACK_IMPORTED_MODULE_2__["default"])('#size', '#material', '#options', '.promocode', '.calc-price', priceWindow, '[data-size]', '[data-material]', '[data-options]');
-  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_10__["default"])();
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_11__["default"])();
   Object(_modules_changeImg__WEBPACK_IMPORTED_MODULE_3__["default"])('.sizes-block');
   Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_0__["default"])('.accordion-heading');
   Object(_modules_burger__WEBPACK_IMPORTED_MODULE_1__["default"])('.burger-menu', '.burger');
+  Object(_modules_scrolling__WEBPACK_IMPORTED_MODULE_8__["default"])('.pageup');
 });
 
 /***/ }),
@@ -4950,6 +4953,59 @@ var modals = function modals() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);
+
+/***/ }),
+
+/***/ "./src/js/modules/scrolling.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/scrolling.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var scrolling = function scrolling(upSelector) {
+  var upElem = document.querySelector(upSelector);
+  window.addEventListener('scroll', function () {
+    upElem.classList.add('animated');
+
+    if (document.documentElement.scrollTop > 1200) {
+      upElem.classList.remove('fadeOut');
+      upElem.classList.add('fadeIn');
+    } else {
+      upElem.classList.remove('fadeIn');
+      upElem.classList.add('fadeOut');
+    }
+  });
+  var element = document.documentElement,
+      body = document.body;
+
+  var calcScroll = function calcScroll() {
+    upElem.addEventListener('click', function (event) {
+      var scrollTop = Math.round(body.scrollTop || element.scrollTop); // console.log(this.hash);
+      // if (this.hash !== '') {
+
+      event.preventDefault();
+      var hashElement = document.querySelector(this.hash),
+          hashElementTop = 0;
+      console.log(hashElement.offsetTop);
+
+      while (hashElement.offsetParent) {
+        hashElementTop += hashElement.offsetTop;
+        hashElement = hashElement.offsetParent;
+        console.log(hashElement);
+      }
+
+      hashElementTop = Math.round(hashElementTop); // smoothScroll(scrollTop, hashElementTop, this.hash);
+      // }
+    });
+  };
+
+  calcScroll();
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (scrolling);
 
 /***/ }),
 
