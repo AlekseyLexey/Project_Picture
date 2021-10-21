@@ -1,4 +1,5 @@
 import accordion from "./modules/accordion";
+import burger from "./modules/burger";
 import calc from "./modules/calc";
 import changeImg from "./modules/changeImg";
 import checkInputsText from "./modules/checkInputsText";
@@ -27,4 +28,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	tabs();
 	changeImg('.sizes-block');
 	accordion('.accordion-heading');
+	burger('.burger-menu', '.burger');
 });
